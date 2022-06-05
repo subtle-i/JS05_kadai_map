@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Basho_Map</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- MapArea -->
+<div class="card">
+    <img src="./picture/top_title.jpg" style="height: 100px; width: auto;" >
+    <ul class="sub_menu">
+       <li><a href="#">Chat</a></li>
+       <li><a href="#">Map</a></li>
+       <li><a href="#">Memo</a></li>
+       <li><a href="#">...</a></li>
+    </ul>
+</div>
+<div class="title">
+  <img src="./picture/title_map.png" alt="">
+</div>
+<div id="myMap" class="map"></div>
+<footer>Copyright2022.BashoApp.All Right Reserved.</footer>
+<!-- /MapArea -->
+
+<!-- jQuery&GoogleMapsAPI -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- /jQuery&GoogleMapsAPI -->
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AumjZ548BPVTh5dMC6Pcp-7wKPVB5QMGxu7f_7wKMTdE9lM7xcF1dCPK1TSNwo_0" async defer></script>
+<script src="./js/BmapQuery.js"></script>
+<!-- javascript -->
+<script>
+// functionの外側で定義。functionは上から下に順番に処理される訳ではない。どの位置で定義してもよい。
+let map;
+
+//1．位置情報の取得に成功した時の処理
+function mapsInit(position) {
+    //lat=緯度、lon=経度 を取得
+    const lat=position.coords.latitude;
+    const lon=position.coords.longitude;
+    // $("#view").html(`緯度:${lat} 経度:${lon}`)
+
+    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+    map.startMap(lat, lon, "load", 6); //The place is Bellevue.
+
+    //----------------------------------------------------
+    //3. Add Pushpin
+    // map.pin( lat, lon, "color", [drag:true|false], [click:true|false], [hover:true|false], [visible:true|false] );
+    //----------------------------------------------------
+    let pin = map.pin(lat, lon, "#ff0000");
+
+// 2. 特定の地点にピンを立て情報を表示
+  const options = [];
+      options[0]={
+          "lat":35.687123,
+          "lon":139.796192,
+          "title":'深川',
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description":'<p>草の戸も　住替る代ぞ　ひなの家</p><img src="./picture/fukagawa.jpeg" width="300">',
+          "show":false
+      };
+      options[1]={
+          "lat":36.7509120205887,
+          "lon":139.580512795823,
+          "title":"日光",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>あらたうと　青葉若葉の　日の光</p><img src="./picture/nikkou.jpeg" width="300">',
+          "show":false
+      };
+      options[2]={
+          "lat":38.366839878794,
+          "lon":141.062515484951,
+          "title":"松島",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>松島や　ああ松島や　松島や</p><img src="./picture/matsushima.jpeg" width="300">',
+          "show":false   
+      };
+      options[3]={
+          "lat":39.0504066964396,
+          "lon":141.111641042158,
+          "title":"平泉",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>夏草や　兵どもが　夢の跡</p><img src="./picture/hiraizumi.jpeg" width="300">',
+          "show":false   
+      };
+      options[4]={
+          "lat":38.3274275507704,
+          "lon":140.433923114239,
+          "title":"立石寺",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>閑さや　岩にしみ入　蝉の声</p><img src="./picture/risyaku.jpeg"width="300">',
+          "show":false   
+      };
+      options[5]={
+          "lat":38.7881514770479,
+          "lon":140.026168245706,
+          "title":"最上川",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>五月雨を　あつめて早し　最上川</p><img src="./picture/mogamigawa.jpeg" width="300">',
+          "show":false   
+      };
+      options[6]={
+          "lat":36.5584072820829,
+          "lon":136.651120848941,
+          "title":"金沢",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>あかあかと　日は難面（つれなく）も　あきの風</p><img src="./picture/kanazawa.jpeg" width="300">',
+          "show":false   
+      };
+      options[7]={
+          "lat":36.9889343384268,
+          "lon":137.657734136553,
+          "title":"市振",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>荒海や　佐渡によこたふ　天河</p><img src="./picture/ichiburi.jpeg" width="300">',
+          "show":false   
+      };
+      options[8]={
+          "lat":36.4049274666099,
+          "lon":136.451776131494,
+          "title":"小松・多太神社",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>むざんやな　甲の下の　きりぎりす</p><img src="./picture/tadajinjya.jpeg" width="300">',
+          "show":false   
+      };
+      options[9]={
+          "lat":35.7714714052823,
+          "lon":136.048829622014,
+          "title":"敦賀",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>月清し　遊行（ゆぎょう）のもてる　砂の上</p><img src="./picture/tsuruga.jpeg" width="300">',
+          "show":false   
+      };
+      options[10]={
+          "lat":35.3678627620657,
+          "lon":136.611820132909,
+          "title":"大垣",
+          "pinColor":"#0067C0",
+          "height":300,
+          "width":320,
+          "description": '<p>蛤の　ふたみにわかれ　行秋ぞ</p><img src="./picture/oogaki.jpeg" width="300">',
+          "show":false   
+      };
+
+      //----------------------------------------------------
+      //4. Switch infoboxs
+      //   infoboxLayers(options, true); //true=one, false=Multiple
+      //----------------------------------------------------
+      map.infoboxLayers(options,true);
+  };
+//2． 位置情報の取得に失敗した場合の処理
+function mapsError(error) {
+  let e = "";
+  if (error.code == 1) { //1＝位置情報取得が許可されてない（ブラウザの設定）
+    e = "位置情報が許可されてません";
+  }
+  if (error.code == 2) { //2＝現在地を特定できない
+    e = "現在位置を特定できません";
+  }
+  if (error.code == 3) { //3＝位置情報を取得する前にタイムアウトになった場合
+    e = "位置情報を取得する前にタイムアウトになりました";
+  }
+  alert("エラー：" + e);
+};
+
+//3.位置情報取得オプション
+var set ={
+  enableHighAccuracy: true, //より高精度な位置を求める
+  maximumAge: 20000,        //最後の現在地情報取得が20秒以内であればその情報を再利用する設定
+  timeout: 10000            //10秒以内に現在地情報を取得できなければ、処理を終了
+};
+
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    map = new Bmap("#myMap");
+
+    //Main:位置情報を取得する処理 //getCurrentPosition :or: watchPosition
+    navigator.geolocation.getCurrentPosition(mapsInit, mapsError, set);
+}
+</script>
+
+</body>
+</html>
